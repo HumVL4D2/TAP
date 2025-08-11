@@ -5,7 +5,7 @@ El objetivo de este trabajo es aplicar los conceptos aprendidos durante la Segun
 El trabajo consta de tres partes:
 
 1. Pipeline en Nextflow
-2. repositorio en Github
+2. Repositorio en Github
 3. Informe en jupyter notebook.
 
 ### Organización del entorno de ejecución del proyecto
