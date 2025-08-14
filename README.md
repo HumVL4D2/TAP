@@ -5,15 +5,20 @@ Este proyecto implementa un pipeline en Nextflow para el procesamiento de archiv
 El pipeline se ejecuta localmente en WSL (Windows Subsystem for Linux) y está configurado para perfiles local y HPC. Se procesan al menos 5 archivos .fna para cumplir con los requisitos.
 
 ## Instrucciones de Uso del Pipeline
-1. Requisitos previos:
-* Instalar Nextflow: curl -s https://get.nextflow.io | bash (mueve el binario a un directorio en PATH).
-* Tener Python 3 instalado con pip (para instalaciones automáticas de PySpark y Matplotlib).
+1. **Requisitos previos:**
+* Instalar Nextflow: `curl -s https://get.nextflow.io | bash` (mueve el binario a un directorio en PATH).
+* Tener Python 3 instalado con `pip` (para instalaciones automáticas de PySpark y Matplotlib).
 * Acceso a internet para descargas.
-2. Clonar el repositorio:
-  
+2. **Clonar el repositorio:**
+  ```bash
+    # Comandos para el terminal
     git clone https://github.com/HumVL4D2/TAP.git
-  
     cd TAP
-3. Ejecutar el pipeline:
-* Para ejecución local: nextflow run main.nf -profile local
+  ```
+3. **Ejecutar el pipeline:**
+* Para ejecución local: `nextflow run main.nf -profile local`
 * Esto creará las carpetas data y results si no existen, descargará archivos si es necesario, procesará los datos y generará resultados en results (incluyendo descriptions.txt, regex_results.txt y gráficos .png).
+4. **Notas:**
+  * Si ya tienes archivos en `./data`, comenta el proceso DOWNLOAD_DATA en `main.nf` para evitar redescargas.
+  * Para HPC, ajusta `nextflow.config` con el queue y executor apropiados, luego usa `-profile hpc`.
+  * Limpia ejecuciones previas con `nextflow clean -f` si hay errores.
