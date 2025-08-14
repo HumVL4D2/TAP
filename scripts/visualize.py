@@ -1,8 +1,9 @@
+#!/usr/bin/env python3
 import matplotlib.pyplot as plt
 import sys
 
 # Leer descriptions.txt
-with open('./results/descriptions.txt', 'r') as f:
+with open('descriptions.txt', 'r') as f:
     desc = f.read().split('\n\n')  # Separar por archivo
 
 files = []
@@ -22,21 +23,21 @@ for block in desc:
 plt.bar(files, num_seqs)
 plt.title('Número de Secuencias por Archivo')
 plt.xticks(rotation=45)
-plt.savefig('./results/num_seqs.png')
+plt.savefig('num_seqs.png')
 plt.clf()
 
 # Gráfico 2: Longitud total
 plt.bar(files, total_lens)
 plt.title('Longitud Total por Archivo')
 plt.xticks(rotation=45)
-plt.savefig('./results/total_lens.png')
+plt.savefig('total_lens.png')
 plt.clf()
 
 # Gráfico 3: %GC (de regex_results para variedad)
-with open('./results/regex_results.txt', 'r') as f:
+with open('regex_results.txt', 'r') as f:
     regex = [int(line.split(': ')[2]) for line in f if line]
 
 plt.bar(files[1:], regex)  # Solo targets
 plt.title('Número de Matches Regex por Target')
 plt.xticks(rotation=45)
-plt.savefig('./results/regex_matches.png')
+plt.savefig('regex_matches.png')

@@ -1,13 +1,18 @@
+##!/usr/bin/env python3
+
+import os
+import re
 from pyspark.sql import SparkSession
 import sys
-import re
 
 # Inicializar Spark
 spark = SparkSession.builder.appName("RegexSearch").getOrCreate()
 
-# Asumir archivos en data_dir (pasados como argumentos o hardcoded para simplicidad)
-data_dir = './data'
-files = [f"{data_dir}/{f}" for f in ["GCF_949788935.1_23220_1_42_h_nanopore_genomic.fna", "GCF_949789875.1_23495_7_287_h_nanopore_genomic.fna", "GCF_949788945.1_23495_7_344_h_nanopore_genomic.fna", "GCF_949790125.1_23220_1_59_h_nanopore_genomic.fna", "GCF_949790135.1_23220_1_60_h_nanopore_genomic.fna"]]
+# Obtener archivos FASTA staged en el directorio actual
+files = sorted([f for f in os.listdir('.') if f.endswith('.fna')])
+
+if len(files) < 2:
+    sys.exit("Error: Se necesitan al menos 2 archivos FASTA (1 query y 1 target).")
 
 # Query: primer archivo, targets: los demás
 query_file = files[0]
@@ -32,7 +37,7 @@ rdd = spark.sparkContext.parallelize(target_files)
 results = rdd.map(search_in_target).collect()
 
 # Guardar resultados
-output = './results/regex_results.txt'
+output = 'regex_results.txt'
 with open(output, 'w') as out:
     for target, count in results:
         out.write(f"Target: {target}, Matches encontrados: {count}\n")
