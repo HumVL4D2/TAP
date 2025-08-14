@@ -1,22 +1,19 @@
-# Técnicas de Programación Avanzada (Tarea 2)
-## Doctorado en Informática Aplicada a Salud y Medio Ambiente
-El objetivo de este trabajo es aplicar los conceptos aprendidos durante la Segunda Unidad.
+# Pipeline en Nextflow para Procesamiento de Archivos FASTA
 
-El trabajo consta de tres partes:
+## Descripción del Proyecto
+Este proyecto implementa un pipeline en Nextflow para el procesamiento de archivos FASTA genómicos. El pipeline incluye la descarga de datos (usando URLs públicas de NCBI como alternativa temporal debido a problemas con el servidor HPC), cálculo de descripciones estadísticas (número de secuencias, longitud total y %GC), búsqueda de expresiones regulares usando PySpark, verificación e instalación de dependencias (PySpark y Matplotlib), y generación de visualizaciones gráficas. El objetivo es aplicar conceptos de workflows en bioinformática, enfocado en la Segunda Unidad del curso.
+El pipeline se ejecuta localmente en WSL (Windows Subsystem for Linux) y está configurado para perfiles local y HPC. Se procesan al menos 5 archivos .fna para cumplir con los requisitos.
 
-1. Pipeline en Nextflow
-2. Repositorio en Github
-3. Informe en jupyter notebook.
-
-### Organización del entorno de ejecución del proyecto
-.
-├── bin                                         : Carpeta bin
-├── data                                        : Contiene los archivos descargados con el proceso DOWNLOAD
-├── results                                     : Carpeta de resultados
-├── scripts                                     : Carpeta que contiene los scripts
-├── work                                        : carpeta de trabajo
-├── informe.ipynb                               : Informe del trabajo
-├── nextflow.config                             : Archivo de configuración
-├── main.nf                                     : Nextflow main
-├── parser.py                                   : Script de ejemplo
-└── README.md                                   : Descripción general del proyecto
+## Instrucciones de Uso del Pipeline
+1. Requisitos previos:
+* Instalar Nextflow: curl -s https://get.nextflow.io | bash (mueve el binario a un directorio en PATH).
+* Tener Python 3 instalado con pip (para instalaciones automáticas de PySpark y Matplotlib).
+* Acceso a internet para descargas.
+2. Clonar el repositorio:
+  
+    git clone https://github.com/HumVL4D2/TAP.git
+  
+    cd TAP
+3. Ejecutar el pipeline:
+* Para ejecución local: nextflow run main.nf -profile local
+* Esto creará las carpetas data y results si no existen, descargará archivos si es necesario, procesará los datos y generará resultados en results (incluyendo descriptions.txt, regex_results.txt y gráficos .png).
