@@ -22,3 +22,9 @@ El pipeline se ejecuta localmente en WSL (Windows Subsystem for Linux) y está c
   * Si ya tienes archivos en `./data`, comenta el proceso DOWNLOAD_DATA en `main.nf` para evitar redescargas.
   * Para HPC, ajusta `nextflow.config` con el queue y executor apropiados, luego usa `-profile hpc`.
   * Limpia ejecuciones previas con `nextflow clean -f` si hay errores.
+
+## Autor
+Lenin W. Ruiz Dávila
+
+## Afiliación
+Universidad Tecnológica Metropolitana (UTEM), Chile
